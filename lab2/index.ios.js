@@ -9,12 +9,17 @@ import {
   AppRegistry,
 } from 'react-native';
 
-import Login from './apps/login.js'
+import {Provider} from 'react-redux'
+import store from './apps/store.js'
+
+import Login from './apps/components/login.js'
 
 export default class lab2 extends Component {
   render() {
     return (
-      <Login />
+      <Provider store={store}>
+        <Login />
+      </Provider>
     );
   }
 }

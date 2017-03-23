@@ -1,0 +1,1 @@
+export const FACEBOOK_ACCOUNT = "FACEBOOK_ACCOUNT"

@@ -9,9 +9,16 @@ import {
 } from 'react-native';
 import {LoginManager, GraphRequestManager, GraphRequest} from 'react-native-fbsdk';
 
-export default class Login extends Component {
+import {connect} from 'react-redux'
+import {StoreFacebook} from '../actions/StoreFacebookAction.js'
+
+class Login extends Component {
   constructor(props) {
     super(props);
+
+    this.setState({
+      facebookAccount: ''
+    })
   }
 
   onConnectFacebook() {
@@ -45,6 +52,7 @@ export default class Login extends Component {
     if (error) {
       alert('Error fetching data: ' + error.toString());
     } else {
+      // this.props.dispatch(StoreFacebook)\
       alert('Success fetching data: ' + JSON.stringify(result));
     }
   }
@@ -72,7 +80,13 @@ export default class Login extends Component {
           Connect with Facebook
         </Text>
       </TouchableOpacity>
-
+      <Text>{JSON.stringify(this.props.facebookAccount)}</Text>
     </View>);
   }
 }
+
+const mapStateToProps = (state) => {
+  return {facebookAccount: state.StoreFacebookReducer}
+}
+
+export default connect(mapStateToProps,{StoreFacebook})(Login)
